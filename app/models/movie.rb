@@ -5,7 +5,7 @@ class Movie < ActiveRecord::Base
     end
     
     def self.with_ratings(ratingfilter)
-        self.where({rating: ratingfilter})
+        self.where(rating: ratingfilter)
     end
     
 end
