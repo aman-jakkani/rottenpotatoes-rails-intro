@@ -20,8 +20,8 @@ class MoviesController < ApplicationController
       ratingsfilters = Movie.all_ratings
     end
     
-    #@movies = Movie.where(rating: ratingsfilters).order(session[:order])
-    @movies = Movie.order(session[:order])
+    @movies = Movie.where({rating: ratingsfilters}).order(session[:order])
+    #@movies = Movie.order(session[:order])
     @all_ratings = Movie.all_ratings
     #@checked_filters = ratingsfilters
     @sortby = session[:order]
