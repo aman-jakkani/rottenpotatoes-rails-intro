@@ -30,7 +30,7 @@ class MoviesController < ApplicationController
     @sortby = session[:order]
     
     #redirect back with URI params
-    redirect_to movies_path order: session[:order] if (params[:order].nil? && session[:order]) 
+    redirect_to movies_path order: session[:order], params[:ratings] if (params[:order].nil? && session[:order]) 
     
   end
   
