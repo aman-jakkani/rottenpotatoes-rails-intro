@@ -18,9 +18,9 @@ class MoviesController < ApplicationController
     # default: render 'new' template
   end
   
-  def clicked
-    @movies = Movies.order(:title, :release_date)
-  end
+  #def clicked
+   # @movies = Movies.order(:title, :release_date)
+  #end
   
   def create
     @movie = Movie.create!(movie_params)
