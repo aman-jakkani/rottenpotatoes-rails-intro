@@ -11,20 +11,9 @@ class MoviesController < ApplicationController
   end
 
   def index
-    if params[:order] == NULL
-      @movies = Movie.all
-    else
-      order = params[:order]
-      if order == 'title'
-        @movies = Movies.order(:title)
-        @sortby = 'title'
-      elsif order == 'release_date'
-        @movies = Movies.order(:release_date)
-        @sortby = 'release_date'
-      else
-        @movies = Movie.all
-      end
-    end
+    session[:order] = params[:order] unless params[:order].nil?
+    @sortby = session[:order]
+    redirect_to movies_path order: session[:order]
   end
   
   def new
