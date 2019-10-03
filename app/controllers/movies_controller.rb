@@ -12,8 +12,9 @@ class MoviesController < ApplicationController
 
   def index
     session[:order] = params[:order] unless params[:order].nil?
+    @movies = Movie.order(session[:order])
     @sortby = session[:order]
-    redirect_to movies_path order: session[:order]
+    redirect_to movies_path order: session[:order] if (params[:order].nil? && session[:order])
   end
   
   def new
