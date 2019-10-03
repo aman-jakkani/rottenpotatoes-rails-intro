@@ -11,8 +11,11 @@ class MoviesController < ApplicationController
   end
 
   def index
+    #setting session parameters
     session[:order] = params[:order] unless params[:order].nil?
     session[:ratings] = params[:ratings] unless params[:ratings].nil? || params[:ratings].empty?
+    
+    #filtering which ratings we need
     ratingsfilters = []
     unless session[:ratings].nil?
       ratingsfilters = session[:ratings].keys
@@ -20,12 +23,13 @@ class MoviesController < ApplicationController
       ratingsfilters = Movie.all_ratings
     end
     
+    #getting movies with those ratings and updating checked filters to show view
     @movies = Movie.with_ratings(ratingsfilters).order(session[:order])
     @all_ratings = Movie.all_ratings
     @checked_filters = ratingsfilters
     @sortby = session[:order]
     redirect_to movies_path order: session[:order], ratings: session[:ratings] if (params[:order].nil? && session[:order]) || (params[:ratings].nil? && session[:ratings])
-    #redirect_to movies_path order: session[:order] if (params[:order].nil? && session[:order])
+    
   end
   
   def new
