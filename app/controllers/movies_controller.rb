@@ -18,7 +18,7 @@ class MoviesController < ApplicationController
       ratingsfilters = session[:ratings].keys
     else
       ratingsfilters = Movie.all_ratings
-    #end
+    end
     
     #@movies = Movie.where(rating: ratingsfilters).order(session[:order])
     @movies = Movie.order(session[:order])
