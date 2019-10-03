@@ -12,9 +12,19 @@ class MoviesController < ApplicationController
 
   def index
     session[:order] = params[:order] unless params[:order].nil?
-    @movies = Movie.order(session[:order])
+    session[:ratings] = params[:ratings] unless params[:ratings].nil? || params[:ratings].empty?
+    ratingsfilters = []
+    unless session[:ratings].nil?
+      ratingsfilters = session[:ratings].keys
+    else
+      ratingsfilters = Movie.all_ratings
+    end
+    
+    @movies = Movie.where({rating: ratingsfilters}).order(session[:order])
+    @all_ratings = Movie.all_ratings
+    @checked_filters = ratingsfilters
     @sortby = session[:order]
-    redirect_to movies_path order: session[:order] if (params[:order].nil? && session[:order])
+    redirect_to movies_path order: session[:order], ratings: session[:ratings] if (params[:order].nil? && session[:order]) || (params[:ratings].nil? && session[:ratings])
   end
   
   def new
