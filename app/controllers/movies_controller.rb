@@ -19,7 +19,7 @@ class MoviesController < ApplicationController
   end
   
   def clicked
-    @movies = Movie.order(:title, :release_date)
+    @movies = Movies.order(:title, :release_date)
   end
   
   def create
