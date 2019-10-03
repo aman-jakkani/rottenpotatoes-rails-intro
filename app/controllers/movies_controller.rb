@@ -11,13 +11,17 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.order(:title, :release_date)
+    @movies = Movie.all
   end
-
+  
   def new
     # default: render 'new' template
   end
-
+  
+  def clicked
+    @movies = Movies.order(:title, :release_date)
+  end
+  
   def create
     @movie = Movie.create!(movie_params)
     flash[:notice] = "#{@movie.title} was successfully created."
