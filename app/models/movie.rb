@@ -1,8 +1,7 @@
 class Movie < ActiveRecord::Base
-    attr_accessor :title, :rating, :description, :release_date
 
     def self.all_ratings
-        Movie.select(:rating).uniq.map { |movie| movie.rating }.sort
+        ['G','PG','PG-13','R','NC-17']
     end
     
 end
