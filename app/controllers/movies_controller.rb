@@ -28,6 +28,8 @@ class MoviesController < ApplicationController
     @all_ratings = Movie.all_ratings
     @checked_filters = ratingsfilters
     @sortby = session[:order]
+    
+    #redirect back with URI params
     redirect_to movies_path order: session[:order], ratings: session[:ratings] if (params[:order].nil? && session[:order]) || (params[:ratings].nil? && session[:ratings])
     
   end
