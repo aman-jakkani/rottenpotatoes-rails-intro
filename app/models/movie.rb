@@ -1,8 +1,4 @@
 class Movie < ActiveRecord::Base
-    attr_accessible :title, :rating, :description, :release_date
-
-    def self.all_ratings
-        Movie.select(:rating).uniq.map { |movie| movie.rating }.sort
-    end
+    scope :all_ratings, where(all_ratings: ['G','PG','PG-13','R','NC-17'])
     
 end
