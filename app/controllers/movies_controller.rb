@@ -12,9 +12,9 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
-    if @sortby == "title"
+    if :order == "title"
       @movies = Movies.order(:title)
-    elsif @sortby == "release_date"
+    elsif :order == "release_date"
       @movies = Movies.order(:release_date)
     else
       @movies = Movie.all
