@@ -20,6 +20,7 @@ class MoviesController < ApplicationController
       @sortby = "release_date"
     else
       @movies = Movie.all
+    end
   end
   
   def new
