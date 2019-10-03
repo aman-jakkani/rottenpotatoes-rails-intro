@@ -13,12 +13,12 @@ class MoviesController < ApplicationController
   def index
     #setting session parameters
     session[:order] = params[:order] unless params[:order].nil?
-    session[:ratings] = params[:ratings] unless params[:ratings].nil? || params[:ratings].empty?
+    #session[:ratings] = params[:ratings] unless params[:ratings].nil? || params[:ratings].empty?
     
     #filtering which ratings we need
     ratingsfilters = []
-    unless session[:ratings].nil?
-      ratingsfilters = session[:ratings].keys
+    unless params[:ratings].nil?
+      ratingsfilters = params[:ratings].keys
     else
       ratingsfilters = Movie.all_ratings
     end
@@ -30,7 +30,7 @@ class MoviesController < ApplicationController
     @sortby = session[:order]
     
     #redirect back with URI params
-    redirect_to movies_path order: session[:order], ratings: session[:ratings] if (params[:order].nil? && session[:order]) || (params[:ratings].nil? && session[:ratings])
+    redirect_to movies_path order: session[:order] if (params[:order].nil? && session[:order]) || (params[:ratings].nil? && session[:ratings])
     
   end
   
