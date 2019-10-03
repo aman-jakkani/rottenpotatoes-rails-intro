@@ -12,21 +12,21 @@ class MoviesController < ApplicationController
 
   def index
     session[:order] = params[:order] unless params[:order].nil?
-    #session[:ratings] = params[:ratings] unless params[:ratings].nil? || params[:ratings].empty?
-    #ratingsfilters = []
-    #unless session[:ratings].nil?
-     # ratingsfilters = session[:ratings].keys
-    #else
-     # ratingsfilters = Movie.all_ratings
+    session[:ratings] = params[:ratings] unless params[:ratings].nil? || params[:ratings].empty?
+    ratingsfilters = []
+    unless session[:ratings].nil?
+      ratingsfilters = session[:ratings].keys
+    else
+      ratingsfilters = Movie.all_ratings
     #end
     
-    #@movies = Movie.with_ratings(ratingsfilters).order(session[:order])
-    @movies = Movie.order(session[:order])
+    @movies = Movie.with_ratings(ratingsfilters).order(session[:order])
+    #@movies = Movie.order(session[:order])
     @all_ratings = Movie.all_ratings
-    #@checked_filters = ratingsfilters
+    @checked_filters = ratingsfilters
     @sortby = session[:order]
-    #redirect_to movies_path order: session[:order], ratings: session[:ratings] if (params[:order].nil? && session[:order]) || (params[:ratings].nil? && session[:ratings])
-    redirect_to movies_path order: session[:order] if (params[:order].nil? && session[:order])
+    redirect_to movies_path order: session[:order], ratings: session[:ratings] if (params[:order].nil? && session[:order]) || (params[:ratings].nil? && session[:ratings])
+    #redirect_to movies_path order: session[:order] if (params[:order].nil? && session[:order])
   end
   
   def new

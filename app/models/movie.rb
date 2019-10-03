@@ -4,4 +4,8 @@ class Movie < ActiveRecord::Base
         ['G','PG','PG-13','R','NC-17'].map{|n| n}
     end
     
+    def self.with_ratings(ratingfilter)
+        self.where(rating: ratingfilter)
+    end
+    
 end
