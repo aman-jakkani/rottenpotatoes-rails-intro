@@ -1,1 +1,2 @@
+https://github.com/aman-jakkani/rottenpotatoes-rails-intro/
 http://young-depths-53412.herokuapp.com
