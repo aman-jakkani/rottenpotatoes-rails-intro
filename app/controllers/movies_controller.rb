@@ -20,13 +20,13 @@ class MoviesController < ApplicationController
       ratingsfilters = Movie.all_ratings
     #end
     
-    @movies = Movie.where(rating: ratingsfilters).order(session[:order])
-    #@movies = Movie.order(session[:order])
+    #@movies = Movie.where(rating: ratingsfilters).order(session[:order])
+    @movies = Movie.order(session[:order])
     @all_ratings = Movie.all_ratings
-    @checked_filters = ratingsfilters
+    #@checked_filters = ratingsfilters
     @sortby = session[:order]
-    redirect_to movies_path order: session[:order], ratings: session[:ratings] if (params[:order].nil? && session[:order]) || (params[:ratings].nil? && session[:ratings])
-    #redirect_to movies_path order: session[:order] if (params[:order].nil? && session[:order])
+    #redirect_to movies_path order: session[:order], ratings: session[:ratings] if (params[:order].nil? && session[:order]) || (params[:ratings].nil? && session[:ratings])
+    redirect_to movies_path order: session[:order] if (params[:order].nil? && session[:order])
   end
   
   def new
